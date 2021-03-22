@@ -31,13 +31,13 @@ public class PhoneControl {
 			default:
 				System.out.println("[다시입력해주세요]");
 			}
-			if(menu==5) {
-				sc.close();				
+			if(menu==5) {	
+				sc.close();	
 				break;
 				}
 			else;
 		}
-		
+
 	}
 
 }

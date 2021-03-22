@@ -1,13 +1,15 @@
 package com.java.phone;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 public class PhoneView {
 
 	// field
-	PhoneRepository pr = new PhoneRepository();
-	DBModify dm =new DBModify();
-	
+
+
 	// constructor
 	public PhoneView(){}
 	
@@ -26,7 +28,16 @@ public class PhoneView {
 	
 	public void listView() {
 		System.out.println("<1.리스트>");
-		pr.phoneList();
+		PhoneBookDao pbd = new PhoneBookDaoImpl();
+		List<PhoneBookVo> list = pbd.getList();
+		Iterator<PhoneBookVo> it = list.iterator();
+		
+		while(it.hasNext()) {
+			PhoneBookVo vo = it.next();
+			System.out.println(vo);
+			
+		}
+		
 	}
 	
 	public void registerView(Scanner sc) {
@@ -34,26 +45,38 @@ public class PhoneView {
 		System.out.print(">이름");
 		String name = sc.next();
 		System.out.print(">휴대전화:");
-		String mPhoneNum = sc.next();
+		String hp = sc.next();
 		System.out.print(">집전화:");
-		String PhoneNum = sc.next();
+		String tel = sc.next();
 		System.out.println();
-		dm.dbInsert(name, mPhoneNum, PhoneNum);
+		PhoneBookVo vo = new PhoneBookVo(name, hp, tel);
+		PhoneBookDao pbd = new PhoneBookDaoImpl();
+		pbd.insert(vo);
+		
 	}
 	
 	public void deleteView(Scanner sc) {
 		System.out.println("<3.삭제>");
 		System.out.print(">번호:");
-		int num = sc.nextInt();
+		long id = sc.nextInt();
 		System.out.println();
-		dm.dbDelete(num);
+		PhoneBookDao pbd = new PhoneBookDaoImpl();
+		pbd.delete(id);
+		
 	}
 	
-	public void searchView(Scanner sc) {				
+	public void searchView(Scanner sc) {		
 		System.out.println("<4.검색>");
 		System.out.print(">이름:");
-		String find = sc.next();
-		pr.phoneListFilter(find);
+		String keyword = sc.next();
+		PhoneBookDao pbd = new PhoneBookDaoImpl();
+		List<PhoneBookVo> list = pbd.search(keyword);
+		
+		Iterator<PhoneBookVo> it = list.iterator();
+		while(it.hasNext()) {
+			PhoneBookVo vo = it.next();
+			System.out.println(vo);
+		}
 	}
 	
 	public void quitView() {

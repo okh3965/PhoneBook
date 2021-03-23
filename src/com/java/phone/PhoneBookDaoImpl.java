@@ -107,12 +107,12 @@ public class PhoneBookDaoImpl implements PhoneBookDao {
 	}
 
 	@Override
-	public boolean insert(PhoneBookVo vo) {
+	public void insert(PhoneBookVo vo) {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO phone_book VALUES(seq_phone_book.NEXTVAL, ?, ?, ?)";
-		int insertedCount = 0;
+//		int insertedCount = 0;
 		
 		try {
 			conn = getConnection();
@@ -121,7 +121,7 @@ public class PhoneBookDaoImpl implements PhoneBookDao {
 			pstmt.setString(2, vo.getHp());
 			pstmt.setString(3, vo.getTel());
 			
-			insertedCount = pstmt.executeUpdate();
+//			insertedCount = pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -132,14 +132,14 @@ public class PhoneBookDaoImpl implements PhoneBookDao {
 				e.printStackTrace();
 			}
 		}		
-		return insertedCount == 1;
+//		return insertedCount == 1;
 	}
 
 	@Override
-	public boolean update(PhoneBookVo vo) {
+	public void update(PhoneBookVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		int updatedCount = 0;
+//		int updatedCount = 0;
 		
 		try {
 			conn = getConnection();
@@ -150,7 +150,7 @@ public class PhoneBookDaoImpl implements PhoneBookDao {
 			pstmt.setString(2, vo.getHp());
 			pstmt.setString(3, vo.getTel());
 			
-			updatedCount = pstmt.executeUpdate();
+//			updatedCount = pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -161,14 +161,14 @@ public class PhoneBookDaoImpl implements PhoneBookDao {
 				e.printStackTrace();
 			}
 		}
-		return updatedCount == 1;
+//		return updatedCount == 1;
 	}
 
 	@Override
-	public boolean delete(Long id) {
+	public void delete(Long id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		int deletedCount = 0;
+//		int deletedCount = 0;
 		
 		try {
 			conn = getConnection();
@@ -176,7 +176,7 @@ public class PhoneBookDaoImpl implements PhoneBookDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setLong(1, id);
-			deletedCount = pstmt.executeUpdate();			
+//			deletedCount = pstmt.executeUpdate();			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -187,7 +187,7 @@ public class PhoneBookDaoImpl implements PhoneBookDao {
 				e.printStackTrace();
 			}
 		}		
-		return deletedCount == 1;
+//		return deletedCount == 1;
 	}
 
 }

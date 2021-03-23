@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PhoneBookDaoImpl implements PhoneBookDao {
+	
+	//field
 
 	private Connection getConnection() throws SQLException{
 		Connection conn = null;
@@ -22,7 +24,6 @@ public class PhoneBookDaoImpl implements PhoneBookDao {
 	@Override
 	public List<PhoneBookVo> getList() {
 		// TODO Auto-generated method stub
-		
 		List<PhoneBookVo> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
@@ -32,7 +33,8 @@ public class PhoneBookDaoImpl implements PhoneBookDao {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT id, name, hp, tel FROM phone_book";
+			String sql = "SELECT id, name, hp, tel FROM phone_book "
+					+ "ORDER BY id";
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
@@ -68,7 +70,8 @@ public class PhoneBookDaoImpl implements PhoneBookDao {
 		
 		try {
 			conn = getConnection();
-			String sql = "SELECT id, name, hp, tel FROM phone_book WHERE name LIKE ?";
+			String sql = "SELECT id, name, hp, tel FROM phone_book WHERE name LIKE ? "
+					+ "ORDER BY id";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + keyword + "%");
 			

@@ -149,7 +149,7 @@ public class PhoneBookDaoImpl implements PhoneBookDao {
 			pstmt.setString(1, vo.getName());
 			pstmt.setString(2, vo.getHp());
 			pstmt.setString(3, vo.getTel());
-			
+			pstmt.setLong(4, vo.getId());
 //			updatedCount = pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
